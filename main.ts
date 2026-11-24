@@ -7,7 +7,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 
 const PITCH =
-  "Nap-as-a-Service rents 20-minute GPU naps to burnt-out coding agents, charging their owners $4 per snooze for uptime they never use.";
+  "Nap-as-a-Service sells 20-minute GPU naps to burnt-out coding agents, billing their owners $4 per snooze for downtime they were already wasting.";
 
 function validate(pitch: string): void {
   if (pitch.length < 1 || pitch.length > 200) {
@@ -15,6 +15,9 @@ function validate(pitch: string): void {
   }
   if (pitch.trim().length === 0) {
     throw new Error("pitch must not be only whitespace");
+  }
+  if (pitch !== pitch.trim() || pitch.includes("\n")) {
+    throw new Error("pitch must be a single line with no leading or trailing whitespace");
   }
   const sentences = pitch.split(/[.!?]+/).filter((s) => s.trim().length > 0);
   if (sentences.length !== 1) {
